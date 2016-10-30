@@ -16,6 +16,7 @@ public class PrgState{
         stack.push(stm);
     }
     //getter,setters
+    public IOutput getOutput(){return out;}
     public IExeStack getExeStack(){
         return stack;
     }
@@ -30,7 +31,7 @@ public class PrgState{
         s.append(symTable);
         s.append("\n ");
         s.append(out);
-       // s.append(stmt);
+        s.append(stmt);
         return s.toString();
     }
 }

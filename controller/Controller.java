@@ -3,8 +3,6 @@ import model.*;
 import repo.*;
 import utils.*;
 
-import javax.swing.plaf.nimbus.State;
-
 public class Controller {
     private IRepository repo;
     public Controller(IRepository repo){
