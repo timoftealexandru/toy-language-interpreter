@@ -1,5 +1,6 @@
 package controller;
 import model.*;
+import model.stmt.Statement;
 import repo.*;
 import utils.*;
 
@@ -20,6 +21,7 @@ public class Controller {
         IExeStack<Statement> stack=currentState.getExeStack();
         while(!stack.isEmpty()){
             executeOneStep(currentState);
+            repo.logPrgStateExec();
 
         }
         System.out.println(currentState);

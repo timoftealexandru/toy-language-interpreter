@@ -1,10 +1,11 @@
-package model;
+package model.stmt;
 
-import utils.IOutput;
+import model.PrgState;
+import model.expr.Expression;
 
-public class printStatement implements Statement {
+public class PrintStatement implements Statement {
     Expression exp;
-    public printStatement(Expression e){
+    public PrintStatement(Expression e){
         exp=e;
     }
     public PrgState execute(PrgState state){

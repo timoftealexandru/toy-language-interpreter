@@ -1,7 +1,7 @@
-package model;
+package model.expr;
 import utils.*;
 
-public class ArithmeticExpr implements Expression{
+public class ArithmeticExpr implements Expression {
     private char operator;
     private Expression operand1,operand2;
     public ArithmeticExpr(char oper,Expression first,Expression second){

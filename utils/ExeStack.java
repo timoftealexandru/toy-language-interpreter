@@ -1,24 +1,40 @@
 package utils;
+
 import java.util.*;
 public class ExeStack<E> implements IExeStack<E> {
-    private Stack<E> stack;
+    private Deque<E> d;
     public ExeStack(){
-        stack=new Stack<E>();
+        this.d=new ArrayDeque<E>();
+    }
+    public Iterable<E> getAll(){
+        return d;
     }
     public void push(E elem){
-        stack.push(elem);
+        d.push(elem);
     }
     public E pop(){
-        return stack.pop();
-
+        return d.pop();
     }
     public boolean isEmpty(){
-        return stack.empty();
+        return d.isEmpty();
     }
     public E top(){
-        return stack.peek();
+        return d.peek();
     }
-    public String toString(){
-        return stack.toString();
+    @Override
+    public String toString() {
+        StringBuilder string = new StringBuilder();
+        string.append("ExecutionStackImpl = [");
+
+        if (!d.isEmpty()) {
+            string.append("\n");
+        }
+
+        for (E statement : d) {
+            string.append("   " + statement.toString() + "\n");
+        }
+
+        string.append("]");
+        return string.toString();
     }
 }

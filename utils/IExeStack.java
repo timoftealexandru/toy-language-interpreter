@@ -5,4 +5,6 @@ public interface IExeStack<E> {
     E pop();
     boolean isEmpty();
     E top();
+
+    Iterable<E> getAll();
 }

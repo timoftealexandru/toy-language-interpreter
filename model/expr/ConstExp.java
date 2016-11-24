@@ -1,7 +1,7 @@
-package model;
+package model.expr;
 import utils.*;
 
-public class ConstExp implements Expression{
+public class ConstExp implements Expression {
     private int value;
     public ConstExp(int value){
         this.value=value;

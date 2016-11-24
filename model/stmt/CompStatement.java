@@ -1,4 +1,5 @@
-package model;
+package model.stmt;
+import model.PrgState;
 import utils.*;
 public class CompStatement implements Statement {
     private Statement first;

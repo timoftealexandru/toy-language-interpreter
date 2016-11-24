@@ -1,4 +1,7 @@
-package model;
+package model.stmt;
+
+import model.PrgState;
+import model.expr.Expression;
 
 public class IfStatement implements Statement {
     Expression exp;

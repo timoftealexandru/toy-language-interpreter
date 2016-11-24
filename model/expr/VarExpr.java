@@ -1,4 +1,5 @@
-package model;
+package model.expr;
+import model.expr.Expression;
 import utils.*;
 public class VarExpr implements Expression {
     private String name;
