@@ -8,13 +8,13 @@ public class PrintStatement implements Statement {
     public PrintStatement(Expression e){
         exp=e;
     }
-    public PrgState execute(PrgState state){
-        int res=exp.evaluate(state.getSymbolTable());
-        state.getOutput().add(res);
-        return state;
+    public PrgState execute(PrgState p){
+        int res=exp.evaluate(p.getSymbolTable(),p.getHeap());
+        p.getOutput().add(res);
+        return p;
     }
     public String toString(){
-        return "print(" +exp.toString()+")";
+        return "Print(" +exp.toString()+")";
     }
 
 }

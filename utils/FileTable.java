@@ -31,13 +31,16 @@ public class FileTable<E,F> implements IFileTable<E,F>{
         }
         return value;
     }
+
+    @Override
     public Iterable<Map.Entry<E,F>> getAll(){
         return map.entrySet();
     }
+
+    @Override
     public void delete(E key){
         map.remove(key);
     }
-
 
     @Override
     public String toString() {

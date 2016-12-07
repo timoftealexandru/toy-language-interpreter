@@ -13,7 +13,7 @@ public class IfStatement implements Statement {
         elseS=s2;
     }
     public PrgState execute(PrgState state){
-        if(exp.evaluate(state.getSymbolTable())==0){
+        if(exp.evaluate(state.getSymbolTable(),state.getHeap())==0){
             state.getExeStack().push(elseS);
         }else{
             state.getExeStack().push(thenS);

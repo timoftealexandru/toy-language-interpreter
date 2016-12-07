@@ -1,6 +1,8 @@
 package utils;
 import model.*;
-public interface IExeStack<E> {
+import java.io.Serializable;
+
+public interface IExeStack<E> extends Serializable{
     void push(E elem);
     E pop();
     boolean isEmpty();

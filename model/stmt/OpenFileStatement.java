@@ -13,7 +13,7 @@ public class OpenFileStatement implements Statement {
     }
     public PrgState execute(PrgState p){
         if(isOpen(fName, p.getFileTable())){
-            throw new InterpretorException("File is already open "+ this.fName);
+            throw new InterpreterException("File is already open "+ this.fName);
         }
         try{
             BufferedReader br=new BufferedReader(new FileReader (fName));
@@ -23,19 +23,19 @@ public class OpenFileStatement implements Statement {
             p.getSymbolTable().add(varName,id);
         }
         catch(IOException e){
-            throw new InterpretorException("Error while reading from file: "+e,e);
+            throw new InterpreterException("Error while reading from file: "+e,e);
         }
         return p;
     }
-    private boolean isOpen(String fn,IFileTable<Integer,FileData> ft){
-        for(Map.Entry<Integer,FileData> it: ft.getAll()){
-            if(fn.equals(it.getValue().getFileName()))
+    private boolean isOpen(String fileName,IFileTable<Integer,FileData> fileTable){
+        for(Map.Entry<Integer,FileData> it: fileTable.getAll()){
+            if(fileName.equals(it.getValue().getFileName()))
                 return true;
         }
         return false;
     }
     public String toString(){
-        return ""+fName+" "+varName;
+        return "OpenFile("+fName+" "+varName+")";
     }
     
 }

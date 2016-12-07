@@ -9,9 +9,9 @@ public class ArithmeticExpr implements Expression {
         operand1 =first;
         operand2=second;
     }
-    public int evaluate(ISymbolTable table){
-        int resultFirst=operand1.evaluate(table);
-        int resultSecond=operand2.evaluate(table);
+    public int evaluate(ISymbolTable table,IHeap heap){
+        int resultFirst=operand1.evaluate(table,heap);
+        int resultSecond=operand2.evaluate(table,heap);
 
         switch (operator){
             case '+': return resultFirst+resultSecond;
@@ -25,6 +25,6 @@ public class ArithmeticExpr implements Expression {
         }
     }
     public String toString(){
-        return " "+operand1+operator+operand2;
+        return " "+operand1+operator+operand2+" ";
     }
 }

@@ -16,6 +16,6 @@ public class CompStatement implements Statement {
         return p;
     }
     public String toString(){
-        return "{"+first+" "+second+"}";
+        return ""+first.toString()+"; "+second.toString()+" ";
     }
 }

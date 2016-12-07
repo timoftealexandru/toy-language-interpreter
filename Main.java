@@ -125,6 +125,7 @@ class Main {
                                 )
                         )
                 );
+
         Statement s7 = new CompStatement(
                 new AssignmentStatement("v", new ConstExpr(0)),
                 new WhileStatement(new CompareExpr("<=", new VarExpr("v"), new ConstExpr(10)),

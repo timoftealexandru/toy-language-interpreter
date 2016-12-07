@@ -24,7 +24,7 @@ public class ExeStack<E> implements IExeStack<E> {
     @Override
     public String toString() {
         StringBuilder string = new StringBuilder();
-        string.append("ExecutionStackImpl = [");
+        string.append("ExeStack = {");
 
         if (!d.isEmpty()) {
             string.append("\n");
@@ -34,7 +34,7 @@ public class ExeStack<E> implements IExeStack<E> {
             string.append("   " + statement.toString() + "\n");
         }
 
-        string.append("]");
+        string.append("}");
         return string.toString();
     }
 }

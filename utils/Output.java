@@ -1,8 +1,8 @@
 package utils;
 import java.util.*;
 public class Output<E> implements IOutput<E> {
-
     private ArrayList<E> outs;
+
     public Output(){
         outs=new ArrayList<>();
     }
@@ -18,7 +18,7 @@ public class Output<E> implements IOutput<E> {
     @Override
     public String toString() {
         StringBuilder string = new StringBuilder();
-        string.append("OutputImpl = [");
+        string.append("Output = {");
 
         if (!outs.isEmpty()) string.append("\n");
 
@@ -26,7 +26,7 @@ public class Output<E> implements IOutput<E> {
             string.append("   " + output + "\n");
         }
 
-        string.append("]");
+        string.append("}");
         return string.toString();
     }
 }

@@ -1,7 +1,15 @@
 package repo;
 import model.*;
-public interface IRepository {
-    void addPrgState(PrgState p);
-    PrgState getCurrent();
+import java.io.Serializable;
+import java.util.*;
+
+public interface IRepository extends Serializable {
+    PrgState getCurrentProgramState();
     void logPrgStateExec();
+    void setMain(PrgState main);
+    public void addPrgState(PrgState p);
+    public List<PrgState> getPrgStates();
+    public void setPrgStates(List<PrgState> l);
+    void serialize(PrgState p,String fName);
+    PrgState deserialize(String fName);
 }
