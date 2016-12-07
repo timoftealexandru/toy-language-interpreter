@@ -5,6 +5,9 @@ import repo.*;
 import utils.*;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.concurrent.*;
+import java.lang.*;
+import java.util.concurrent.Callable;
 
 public class Controller {
     private IRepository repo;
@@ -13,35 +16,56 @@ public class Controller {
     }
 
     private ExecutorService executor;
-    public List<PrgState> remCompPrg(List<PrgState> l){
+    public List<PrgState> removeCompletedPrgState(List<PrgState> l){
         return l.stream()
                 .filter(p->p.isNotCompleted())
                 .collect(Collectors.toList());
     }
-    public void OneStepForAll(Lisst<PrgState> those){
-        those.forEach(prg->this.repo.logPrgStateExec(prg));
 
-        List<Callable<PrgState>> callList=those.stream()
-                .map(p->(Callable<PrgState))(()->retyrb p.OneStep();)
-												.collect(Collectors.toList()));
+    public void oneStepForAll(List<PrgState> list){
+        list.forEach(prg->this.repo.logPrgStateExec(prg));
 
-        List<PrgState> these=executor
-                .invokeAll(callList)
-                .stream.map(future->try{return future.get();}catch(Exception e){print(..)return null})
-									.filter(p->p!=null)
-                .collect(Collectors.toList);
-        those.addAll(these);
-        repo.setPrgStates(those);
+
+        List<Callable<PrgState>> callables= list
+                .stream()
+                .map((PrgState prg)->(Callable<PrgState>) (()->prg.oneStep()))
+                .collect(Collectors.toList());
+
+        try {
+            List<PrgState> newPrg = executor
+                    .invokeAll(callables)
+                    .stream()
+                    .map(future -> {
+                        try {
+                            return future.get();
+                        } catch (InterruptedException er) {
+                            er.printStackTrace();
+                        } catch (ExecutionException err) {
+                            err.printStackTrace();
+                        }
+                        return null;
+                    })
+                    .filter(p -> p != null)
+                    .collect(Collectors.toList());
+
+            list.addAll(newPrg);
+            repo.setPrgStates(list);
+        }
+        catch(InterruptedException e){
+            e.printStackTrace();
+        }
+
     }
     public void allStep(){
-        executor Executors.newFixedThreadPool(2);
+        executor = Executors.newFixedThreadPool(2);
         while(true){
-            List<PrgState> list=removeCompletedPrg(repo.getPrgState());
-            listif(list.size()==0){
-                oneStepForAll(list);
+            List<PrgState> list=removeCompletedPrgState(repo.getPrgStates());
+            if(list.size()==0){
+                break;
             }
-            executor.shutdownNow();
+            oneStepForAll(list);
         }
+        executor.shutdownNow();
     }
 
     public void executeOneStep(PrgState state){
@@ -51,6 +75,7 @@ public class Controller {
             stmt.execute(state);
         }
     }
+    /*
     public void executeAll()  {
         PrgState prg = repo.getCurrentProgramState();
         while(!prg.getExeStack().isEmpty()) {
@@ -64,6 +89,9 @@ public class Controller {
             }
         }
     }
+    */
+
+
     private Map<Integer, Integer> conservativeGarbageCollector(Collection<Integer> symTableValues, Map<Integer, Integer> heap) {
         return heap.entrySet()
                 .stream()

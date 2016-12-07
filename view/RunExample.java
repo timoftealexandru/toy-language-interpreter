@@ -9,7 +9,7 @@ public class RunExample extends Command {
     @Override
     public void execute() {
         try{
-            ctr.executeAll();
+            ctr.allStep();
         }
         catch(Exception e){
             System.out.println("Exception: " + e);

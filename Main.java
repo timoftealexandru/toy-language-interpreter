@@ -6,10 +6,13 @@ import repo.*;
 import controller.*;
 import view.*;
 
+import javax.swing.plaf.nimbus.State;
+
 class Main {
     public static Controller getNewController(Statement prg){
         PrgState first = new PrgState(new ExeStack<Statement>(), new SymbolTable<String, Integer>(), new Output<Integer>(),new FileTable<Integer, FileData>(),new Heap<>() , prg);
-        Repository repo = new Repository(first,"./logs/log.txt");
+        Repository repo = new Repository("./logs/log.txt");
+        repo.addPrgState(first);
         Controller ctrl = new Controller(repo);
         return ctrl;
     }
@@ -150,6 +153,39 @@ class Main {
                         new PrintStatement(new VarExpr("v")))
         );
 
+        /*
+
+        v=10;new(a,22);
+        fork(wH(a,30);v=32;print(v);print(rH(a)));
+        print(v);print(rH(a))
+         */
+        Statement s9=
+                new CompStatement(
+                        new CompStatement(
+                                new AssignmentStatement(
+                                        "v",
+                                        new ConstExpr(10)
+                                ),
+                                new NewStatement(
+                                        "a",
+                                        new ConstExpr(22)
+                                )
+                        ),
+                        new CompStatement(
+                                new CompStatement(
+                                        new ForkStatement(
+                                                new WriteHeapStatement(
+                                                        "a",
+                                                        new ConstExpr(30)
+                                                )
+                                        ),
+                                        new AssignmentStatement(
+                                                "v",
+                                                new ConstExpr(32)
+
+                                ),
+                        )
+                );
         TextMenu menu = new TextMenu();
         menu.addCommand(new ExitCommand("0", "exit"));
         menu.addCommand(new RunExample("1", s1.toString(), getNewController(s1)));

@@ -45,15 +45,15 @@ public class Repository implements IRepository {
     }
 
     @Override
-    public void logPrgStateExec() {
+    public void logPrgStateExec(PrgState prgState) {
         try (PrintWriter logFile = new PrintWriter(new BufferedWriter(new FileWriter(fileName, true)))) {
-            logFile.append(this.programState.getExeStack().toString());
+            logFile.append(prgState.getExeStack().toString());
             logFile.append("\n");
-            logFile.append(this.programState.getSymbolTable().toString());
+            logFile.append(prgState.getSymbolTable().toString());
             logFile.append("\n");
-            logFile.append(this.programState.getOutput().toString());
+            logFile.append(prgState.getOutput().toString());
             logFile.append("\n");
-            logFile.append(this.programState.getHeap().toString());
+            logFile.append(prgState.getHeap().toString());
             logFile.append("\n");
             logFile.close();
         } catch (IOException error) {
