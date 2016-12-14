@@ -23,17 +23,22 @@ public class PrgState implements Serializable{
         stmt=stm;
         stack.push(stmt);
         this.id=generator.generatePrgStateId();
+        System.out.println(this.id);
     }
-
 
     public boolean isNotCompleted(){
         return !stack.isEmpty();
     }
-    public PrgState oneStep(){
-        if(stack.isEmpty())
-            throw new InterpreterException("Eroare:");
-        Statement s=stack.pop();
-        return s.execute(this);
+
+    public PrgState oneStep() {
+        try {
+            Statement currentStatement = this.stack.pop();
+            return currentStatement.execute(this);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     //getter,setters
@@ -51,10 +56,15 @@ public class PrgState implements Serializable{
 
     @Override
     public String toString() {
-        return stack.toString() + "\n"
+        return  id+"\n"
+                +stack.toString() + "\n"
                 + symTable.toString() + "\n"
                 + fTable.toString() + "\n"
                 + out.toString() + "\n"
                 + heap.toString();
+    }
+
+    public int getId() {
+        return id;
     }
 }

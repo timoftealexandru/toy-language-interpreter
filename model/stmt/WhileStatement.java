@@ -18,7 +18,7 @@ public class WhileStatement implements Statement {
             exeStack.push(this);
             exeStack.push(stmt);
         }
-        return p;
+        return null;
     }
     public String toString(){
         return "While("+this.exp.toString()+")"+this.stmt.toString();

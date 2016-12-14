@@ -25,7 +25,7 @@ public class OpenFileStatement implements Statement {
         catch(IOException e){
             throw new InterpreterException("Error while reading from file: "+e,e);
         }
-        return p;
+        return null;
     }
     private boolean isOpen(String fileName,IFileTable<Integer,FileData> fileTable){
         for(Map.Entry<Integer,FileData> it: fileTable.getAll()){

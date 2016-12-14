@@ -14,7 +14,7 @@ public class NewStatement implements Statement{
         int result=expression.evaluate(p.getSymbolTable(),p.getHeap());
         int addr = p.getHeap().add(result);
         p.getSymbolTable().add(varName,addr);
-        return p;
+        return null;
     }
     public String toString(){
         return "New("+varName+"," + expression.toString()+")";

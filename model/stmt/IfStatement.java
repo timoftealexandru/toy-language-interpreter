@@ -18,7 +18,7 @@ public class IfStatement implements Statement {
         }else{
             state.getExeStack().push(thenS);
         }
-        return state;
+        return null;
     }
     public String toString(){
         return "IF("+ exp.toString()+") THEN(" +thenS.toString()+")ELSE("+elseS.toString()+")";

@@ -11,7 +11,7 @@ public class PrintStatement implements Statement {
     public PrgState execute(PrgState p){
         int res=exp.evaluate(p.getSymbolTable(),p.getHeap());
         p.getOutput().add(res);
-        return p;
+        return null;
     }
     public String toString(){
         return "Print(" +exp.toString()+")";

@@ -19,7 +19,7 @@ public class WriteHeapStatement implements Statement {
         } else {
             throw new RuntimeException("Invalid heap memory address ! ");
         }
-        return p;
+        return null;
     }
     public String toString(){
         return "wH("+varName+","+expression.toString()+")";

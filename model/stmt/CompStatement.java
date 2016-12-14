@@ -13,7 +13,7 @@ public class CompStatement implements Statement {
         IExeStack exe = p.getExeStack();
         exe.push(second);
         exe.push(first);
-        return p;
+        return null;
     }
     public String toString(){
         return ""+first.toString()+"; "+second.toString()+" ";

@@ -13,7 +13,7 @@ public class AssignmentStatement implements Statement {
         ISymbolTable t= p.getSymbolTable();
         int result = expr.evaluate(t,p.getHeap());
         t.add(var,result);
-        return p;
+        return null;
     }
     public String toString(){
         return ""+var+"="+expr.toString()+"";

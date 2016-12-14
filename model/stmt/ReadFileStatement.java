@@ -30,8 +30,8 @@ public class ReadFileStatement implements Statement {
 
                 Statement assignment = new AssignmentStatement(variable, value);
 
-                return assignment.execute(p);
-
+                assignment.execute(p);
+                return null;
             } catch (IOException e) {
                 throw new InterpreterException("error: file could not be read");
             }
