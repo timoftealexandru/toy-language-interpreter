@@ -42,6 +42,8 @@ public class PrgState implements Serializable{
     }
 
     //getter,setters
+
+    public int getId() {return id;}
     public IFileTable<Integer,FileData> getFileTable(){return fTable; }
     public IOutput<Integer> getOutput(){return out;}
     public IExeStack<Statement> getExeStack(){
@@ -64,7 +66,4 @@ public class PrgState implements Serializable{
                 + heap.toString();
     }
 
-    public int getId() {
-        return id;
-    }
 }
