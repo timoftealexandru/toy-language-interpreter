@@ -6,13 +6,13 @@ import repo.*;
 import controller.*;
 import view.*;
 
-import javax.swing.plaf.nimbus.State;
 
 class Main {
     public static Controller getNewController(Statement prg){
         PrgState first = new PrgState(new ExeStack<Statement>(), new SymbolTable<String, Integer>(), new Output<Integer>(),new FileTable<Integer, FileData>(),new Heap<>() , prg);
         Repository repo = new Repository("./logs/log.txt");
         repo.addPrgState(first);
+
         Controller ctrl = new Controller(repo);
         return ctrl;
     }
@@ -159,33 +159,33 @@ class Main {
         fork(wH(a,30);v=32;print(v);print(rH(a)));
         print(v);print(rH(a))
          */
-        Statement s9=
+        Statement s9;
+        Statement st1 = new CompStatement(
+                new AssignmentStatement("v", new ConstExpr(10)),
+                new NewStatement("a", new ConstExpr(22))
+        );
+        Statement st2 = new ForkStatement(
                 new CompStatement(
+                        new WriteHeapStatement("a", new ConstExpr(30)),
                         new CompStatement(
-                                new AssignmentStatement(
-                                        "v",
-                                        new ConstExpr(10)
-                                ),
-                                new NewStatement(
-                                        "a",
-                                        new ConstExpr(22)
-                                )
-                        ),
-                        new CompStatement(
+                                new AssignmentStatement("v", new ConstExpr(32)),
                                 new CompStatement(
-                                        new ForkStatement(
-                                                new WriteHeapStatement(
-                                                        "a",
-                                                        new ConstExpr(30)
-                                                )
-                                        ),
-                                        new AssignmentStatement(
-                                                "v",
-                                                new ConstExpr(32)
-
-                                ),
+                                        new PrintStatement(new VarExpr("v")),
+                                        new PrintStatement(new ReadHeapExpr("a"))
+                                )
                         )
-                );
+                )
+        );
+        Statement st3 = new CompStatement(
+                new PrintStatement(new VarExpr("v")),
+                new PrintStatement(new ReadHeapExpr("a"))
+        );
+        s9 = new CompStatement(
+                st1, new CompStatement(
+                st2, st3
+        ));
+
+
         TextMenu menu = new TextMenu();
         menu.addCommand(new ExitCommand("0", "exit"));
         menu.addCommand(new RunExample("1", s1.toString(), getNewController(s1)));
@@ -198,6 +198,7 @@ class Main {
         menu.addCommand(new RunExample("8", s8.toString(), getNewController(s8)));
         menu.addCommand(new SerializeCommand("9", s8.toString(), getNewController(s8)));
 
+        menu.addCommand(new RunExample("10", s9.toString(), getNewController(s9)));
         menu.show();
     }
 }
